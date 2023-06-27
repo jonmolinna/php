@@ -72,8 +72,8 @@ INSERT INTO pais (id_pais, pais) VALUES
 (34, "Australia"),
 (35, "Nueva Zelanda");
 
-
--- 59-56
+ALTER TABLE pais
+ADD FOREIGN KEY (id_pais) REFERENCES contactos(pais);
 
 
 
