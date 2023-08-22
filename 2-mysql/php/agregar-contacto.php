@@ -8,7 +8,7 @@
     $phono = $_POST["telefono_txt"];
     $country = $_POST["pais_slc"];
 
-    $img_gender = ($gender == 'M') ? "img/fotos/amigo.png" : "img/fotos/amiga.png";
+    $img_gender = ($gender == 'M') ? "amigo.png" : "amiga.png";
 
     # Verificamos que no exista el email del usuario
     include "conexion.php";
