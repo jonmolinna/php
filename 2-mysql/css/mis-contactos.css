@@ -105,6 +105,40 @@ nav,
   vertical-align: top;
 }
 
+table {
+  border: 0.1em solid #f60;
+  border-radius: 1em;
+  cursor: default;
+  font-family: Hervetica, Verdana;
+  font-size: 0.75em;
+  padding: 0.25em;
+  width: 100%;
+}
+
+table img {
+  max-width: 50%;
+}
+
+table td {
+  border: 0.1em solid #212121;
+  border-radius: 0.5em;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+table tr {
+  background: powderblue;
+}
+
+table thead tr {
+  background: transparent;
+}
+
+/* par => even odd => impar */
+table tr:nth-child(even) {
+  background: darksalmon;
+}
+
 ul {
   list-style: none;
 }

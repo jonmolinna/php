@@ -1,1 +1,8 @@
-<p>Consultar por todo</p>
+<?php
+
+    $query = "SELECT * FROM contactos";
+
+    include("php/tabla-resultados.php")
+
+
+?>
