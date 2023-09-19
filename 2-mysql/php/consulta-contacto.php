@@ -3,13 +3,88 @@
         <legend>Consulta de contactos</legend>
         <label for="consulta-lista">Tipo de consulta</label>
         <select name="consulta_slc" id="consulta-lista" required>
-            <option value="">- - -</option>
-            <option value="todos" <?php if($_GET["consulta_slc"] ?? null == "todos"){echo " selected";}; ?>>Todos</option>
-            <option value="email" <?php if($_GET["consulta_slc"] ?? null == "email"){echo " selected";}; ?>>Por email</option>
-            <option value="inicial" <?php if($_GET["consulta_slc"] ?? null == "inicial"){echo " selected";}; ?>>Por inicial</option>
-            <option value="sexo" <?php if($_GET["consulta_slc"] ?? null == "sexo"){echo " selected";}; ?>>Por sexo</option>
-            <option value="pais" <?php if($_GET["consulta_slc"] ?? null == "pais"){echo " selected";}; ?>>Por país</option>
-            <option value="buscador" <?php if($_GET["consulta_slc"] ?? null == "buscador"){echo " selected";}; ?>>Tipo buscador</option>
+            <option 
+                value="" 
+                <?php 
+                    if($_GET["consulta_slc"] ?? null == ""){
+                        if($_GET["consulta_slc"] == "") {
+                            echo " selected";} 
+                        }
+                ?>
+            >
+                - - -
+            </option>
+            <option 
+                value="todos" 
+                <?php 
+                    if($_GET["consulta_slc"] ?? null) {
+                        if($_GET["consulta_slc"] == "todos") {
+                            echo " selected";
+                        }
+                    } 
+                ?>
+            >
+                Todos
+            </option>
+            <option 
+                value="email" 
+                <?php 
+                    if($_GET["consulta_slc"] ?? null){
+                        if($_GET["consulta_slc"] == "email") {
+                            echo " selected";
+                        } 
+                    }
+                ?>
+            >
+                Por email
+            </option>
+            <option 
+                value="inicial" 
+                <?php 
+                    if($_GET["consulta_slc"] ?? null){
+                        if($_GET["consulta_slc"] == "inicial") {
+                            echo " selected";
+                        }
+                    } 
+                ?>
+            >
+                Por inicial
+            </option>
+            <option 
+                value="sexo" 
+                <?php 
+                    if($_GET["consulta_slc"] ?? null){
+                        if($_GET["consulta_slc"] == "sexo")
+                        echo " selected";
+                    } 
+                ?>
+            >
+                Por sexo
+            </option>
+            <option 
+                value="pais" 
+                <?php 
+                    if($_GET["consulta_slc"] ?? null){
+                        if($_GET["consulta_slc"] == "pais") {
+                            echo " selected";
+                        }
+                    } 
+                ?>
+            >
+                Por país
+            </option>
+            <option 
+                value="buscador" 
+                <?php 
+                    if($_GET["consulta_slc"] ?? null){
+                        if($_GET["consulta_slc"] == "buscador") {
+                            echo " selected";
+                        }
+                    } 
+                ?>
+            >
+                Tipo buscador
+            </option>
         </select>
         <?php
             switch($_GET["consulta_slc"] ?? null) {
