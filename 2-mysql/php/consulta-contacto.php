@@ -6,7 +6,7 @@
             <option 
                 value="" 
                 <?php 
-                    if($_GET["consulta_slc"] ?? null == ""){
+                    if($_GET["consulta_slc"] ?? null){
                         if($_GET["consulta_slc"] == "") {
                             echo " selected";} 
                         }
