@@ -11,6 +11,8 @@ En MySQL existen 2 tipos de engine para tablas:
 1. MyISAM - tablas planas, son como si fueran excel
 2. InnoDB - tablas relacionales
 
+http://mysql.conclase.net/curso/index.php
+
 */
 
 CREATE DATABASE contactos_php;
@@ -28,6 +30,7 @@ CREATE TABLE contactos(
     PRIMARY KEY(email),
     FULLTEXT KEY buscador(email, nombre, sexo, telefono, pais)
 )ENGINE=MyISAM DEFAULT CHARSET=latin1;
+-- FULLTEXT solo funciona en MyISAM
 
 CREATE TABLE pais(
     id_pais INT NOT NULL AUTO_INCREMENT,

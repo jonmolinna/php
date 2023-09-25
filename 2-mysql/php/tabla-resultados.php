@@ -1,6 +1,9 @@
 <?php
 
-    include("conexion.php");
+    if(empty($_GET["pais_slc"])) {
+        include("conexion.php");
+    }
+
     include("funciones.php");
 
     $data = $connection->query($query);
