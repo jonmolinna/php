@@ -1,0 +1,18 @@
+Niveles de Acceso
+----------------------------------------
+1. Publicos => Estas pueden ser accedidas desde cualquier parte de la aplicación, sin restriccion.
+2. Privados => Estos solo pueden ser accedidos por la clase que los definio
+3. Protegidos => Pueden ser accedidos por la propia clase que los definio, asi como las clases que
+                lo heredan, pero no, desde otras partes de la aplicación.
+4. Estaticos => Pueden ser accedidos sin necesidad de instanciar un objeto y su valor es estatico
+                es decir, no pueden variar ni ser modificado.
+
+Constructor => Su funcion es la de ejecutar cualquier inicializacion que el objeto
+            necesite antes de ser utilizado.
+
+Destructor => Es el encargado de liberar la memoria y se ejecuta automaticamente al final de instanciar
+                la clase.
+
+Static => en los propiedades estaticos solo se imprime los datos dentro de la clase. Y no fuera por ella,
+            y siempre tienen el mismo valor. ejm PI = 3,14...
+            Las propiedades static nunca van a cambiar su definicion.
