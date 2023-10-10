@@ -16,3 +16,7 @@ Destructor => Es el encargado de liberar la memoria y se ejecuta automaticamente
 Static => en los propiedades estaticos solo se imprime los datos dentro de la clase. Y no fuera por ella,
             y siempre tienen el mismo valor. ejm PI = 3,14...
             Las propiedades static nunca van a cambiar su definicion.
+
+
+
+mysql -u root -p
