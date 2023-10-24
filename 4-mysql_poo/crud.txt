@@ -7,15 +7,31 @@ INSERT INTO table SET
     campo3 = 'value3';
 
 
+MVC
+--------------------------------
+Modelo => representa a la logica de negocio (manipulacion de datos).
+Vista => representa la presentacion de los datos (diseño de paginas).
+Controlador => representa el codigo de navegacion de la aplicacion (control de flujo).
+
+-- https://www.omdbapi.com/
+
+
+
 {
     "Title":"",
     "Year":"",
+    "Rated":"N/A",
+    "Released":"",
+    "Runtime":"62 min",
     "Genre":"",
-    "Writer":"",
+    "Director":"",
     "Actors":"",
     "Plot":"",
+    "Language":"Polish",
     "Country":"",
     "Poster":"",
     "imdbRating":"",
+    "imdbVotes":"2,038",
     "imdbID":"",
-    "Type":""}
+    "Type":"",
+}
