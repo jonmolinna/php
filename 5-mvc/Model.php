@@ -33,12 +33,26 @@
             $this->connection->close();
         }
 
+        // INSERT, DELETE, UPDATE
         protected function set_query() {
             $this->db_open();
             $this->connection->query($this->query);
+            $this->db_close();
         }
 
-        protected function get_query() {}
-    }
+        // SELECT
+        protected function get_query() {
+            $this->db_open();
 
-    // 33:31
+            $result = $this->connection->query($this->query);
+
+            while($this->rows[] = $result->fetch_assoc());
+            // foreach($this->rows[] = $result as $data )
+
+            $result->close();
+
+            $this->db_close();
+
+            return array_pop($this->rows);
+        }
+    }
