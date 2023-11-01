@@ -10,7 +10,20 @@
             $this->db_name = 'mexflix';
         }
 
-        public function create(){}
+        public function create($body = array()){
+            foreach($body as $key => $value) {
+                // Variables variables
+                // Example
+                // $var = 'Hello';
+                // $$var = 'World';
+                // echo $var . ' '. $Hello ===> 'Hello World';
+                $$key = $value;
+            }
+
+            $this->query = "INSERT INTO status (id, status) VALUES ($id, '$status')";
+
+            $this->set_query();
+        }
 
         public function read($status_id = ''){
             $this->query = $status_id != '' ? "SELECT * FROM status WHERE id = $status_id" : "SELECT * FROM status";
@@ -32,9 +45,19 @@
             // return $this->rows;
         }
 
-        public function update(){}
+        public function update($body = array()){
+            foreach($body as $key => $value) {
+                $$key = $value;
+            }
 
-        public function delete(){}
+            $this->query = "UPDATE status SET status = '$status' WHERE id = $id";
+            $this->set_query();
+        }
+
+        public function delete($id = ''){
+            $this->query = "DELETE FROM status WHERE id = $id";
+            $this->set_query();
+        }
 
         public function __destruct() {
             // unset($this);

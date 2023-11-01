@@ -31,6 +31,22 @@
     echo '</table>';
 
     echo '<h2>Insertando Status</h2>';
+    // Array associativa
+    $new_status = array(
+        'id' => 0,
+        'status' => 'Novelas',
+    );
+
+    // $status->create($new_status);
+
     echo '<h2>Actualizando Status</h2>';
+    $update_status = array(
+        'id' => 7,
+        'status' => 'Other Status'
+    );
+
+    // $status->update($update_status);
+
     echo '<h2>Eliminando Status</h2>';
+    // $status->delete(7);
 
