@@ -1,10 +1,10 @@
 <?php
 
-    require('StatusModel.php');
+    require('StatusController.php');
 
     echo '<h1>CRUD con MVC de la tabla Status</h1>';
 
-    $status = new StatusModel();
+    $status = new StatusController();
 
     $data = $status->read();
     // var_dump($data);
@@ -41,12 +41,12 @@
 
     echo '<h2>Actualizando Status</h2>';
     $update_status = array(
-        'id' => 7,
+        'id' => 8,
         'status' => 'Other Status'
     );
 
     // $status->update($update_status);
 
     echo '<h2>Eliminando Status</h2>';
-    // $status->delete(7);
+    // $status->delete(8);
 
