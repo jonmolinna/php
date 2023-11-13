@@ -1,0 +1,9 @@
+#Options +FollowSymlinks
+#RewriteEngine On
+
+#RewriteBase /php_curso/6-mexflix>
+
+#RewriteCond %{SCRIPT_FILENAME} !-d
+#RewriteCond %{SCRIPT_FILENAME} !-f
+
+#Rewrite ^(.*)$ index.php?r=$1 [L]

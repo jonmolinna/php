@@ -1,0 +1,8 @@
+.htaccess => denega el acceso al directorio de la carpeta desde en el navegador
+
+Rewrite ^(.*)-(.*)$ index.php?r=$1&q=&2
+
+Guardar o Actualuzar
+-----------------------
+REPLACE INTO status (id, status) VALUES (0, 'Otro Status');
+REPLACE status SET id = 0, status = 'Other Status';
