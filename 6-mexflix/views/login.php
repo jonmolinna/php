@@ -1,35 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./public/css/mexflix.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-
-    <header class="container mx-auto flex justify-between py-3">
-        <div class="">
-            <h1 class="text-xl font-bold">Mexflix</h1>
+<div class="flex justify-center mt-5">
+    <form method="post" class="space-y-2">
+        <div>
+            <input 
+                type="text" 
+                name="user" 
+                placeholder="usuario" 
+                required 
+                class="border border-gray-600 p-1 rounded-sm"
+            >
         </div>
-        <nav class="">
-            <ul class="flex items-center space-x-4">
-                <li class="nobollet item"><a href="./">Inicio</a></li>
-                <li class="nobollet item"><a href="movies">Movies</a></li>
-                <li class="nobollet item"><a href="usuarios"></a>Usuarios</li>
-                <li class="nobollet item"><a href="status">Status</a></li>
-                <li class="nobollet item"><a href="salir">Salir</a></li>
-            </ul>
-        </nav>
-    </header>
+        <div>
+            <input 
+                type="password"
+                name="password" 
+                placeholder="password" 
+                required
+                class="border border-gray-600 p-1 rounded-sm"
+            >
+        </div>
+        <div>
+            <input 
+                type="submit"
+                value="Enviar"
+                class="bg-pink-700 w-full p-1 rounded-sm text-white"
+            >
+        </div>
+    </form>
+</div>
 
-    <main class="container mx-auto">
-        <p>Aqui el formulario del login</p>
-        <!-- 33:47 -->
-    </main>
+<?php if(isset($_GET['error'])) { ?>
+    <div class="container mx-auto mt-4">
+        <p class="text-red-700 text-center font-semibold">
+            <?php print $_GET['error']; ?>
+        </p>
+    </div>
 
-    <script src="./public/js/mexflix.js"></script>
-
-</body>
-</html>
+<?php } ?>
