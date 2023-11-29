@@ -1,8 +1,11 @@
+#Denegacion de servicio
 Options +FollowSymlinks
 RewriteEngine On
 
-RewriteBase /php_curso/6-mexflix>
+#ruta de la aplicacion
+RewriteBase /php_curso/6-mexflix
 
+#condicionales para acceder
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 
