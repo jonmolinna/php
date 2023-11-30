@@ -1,7 +1,8 @@
+<?php
 
-    </main>
-
-    <script src="./public/js/mexflix.js"></script>
-
-</body>
-</html>
+    print('
+        </main>
+        <script src="./public/js/mexflix.js"></script>
+        </body>
+        </html>    
+    ');
