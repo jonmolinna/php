@@ -37,7 +37,15 @@
                         break;
                     
                     case 'usuarios':
-                        $controller->load_view('users');
+                        if (!isset($_POST['r'])) {
+                            $controller->load_view('users');
+                        } else if ($_POST['r'] == 'users-add') {
+                            $controller->load_view('users-add');
+                        } else if ($_POST['r'] == 'users-edit') {
+                            $controller->load_view('users-edit');
+                        } else if ($_POST['r'] == 'users-delete') {
+                            $controller->load_view('users-delete');
+                        }
                         break;
 
                     case 'status':
