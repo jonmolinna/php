@@ -3,7 +3,7 @@
     class UsersController {
         private $model;
 
-        public function __contruct() {
+        public function __construct() {
             $this->model = new UsersModels();
         }
 
