@@ -60,7 +60,7 @@
                     </td>
                     <td>
                         <form method="POST">
-                            <input type="hidden" name="r" value="user-edit">
+                            <input type="hidden" name="r" value="users-edit">
                             <input type="hidden" name="user" value="' . $data[$i]['user'] . '">
                             <input 
                                 class="bg-green-800 p-1 px-2 text-white rounded-md cursor-pointer"

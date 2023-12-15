@@ -10,8 +10,8 @@
             $this->set_query();
         }
 
-        public function get($id = '') {
-            $this->query = $id != '' ? "SELECT * FROM users WHERE user = '$user'" : "SELECT * FROM users";
+        public function get($user = '') {
+            $this->query = $user != '' ? "SELECT * FROM users WHERE user = '$user'" : "SELECT * FROM users";
 
             $this->get_query();
 
