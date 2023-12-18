@@ -71,7 +71,7 @@
                     </td>
                     <td>
                         <form method="POST">
-                            <input type="hidden" name="r" value="user-delete">
+                            <input type="hidden" name="r" value="users-delete">
                             <input type="hidden" name="user" value="' . $data[$i]['user'] . '">
                             <input 
                                 class="bg-red-800 p-1 px-2 text-white rounded-md cursor-pointer"

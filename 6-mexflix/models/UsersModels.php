@@ -27,7 +27,7 @@
         }
 
         public function delete($id = '') {
-            $this->query = "DELETE FROM users WHERE user = '$user'";
+            $this->query = "DELETE FROM users WHERE user = '$id'";
             $this->set_query();
         }
 

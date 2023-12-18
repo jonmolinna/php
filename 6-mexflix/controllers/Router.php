@@ -33,7 +33,21 @@
                         break;
 
                     case 'movies':
-                        $controller->load_view('movies');
+                        if (!isset($_POST['r'])) {
+                            $controller->load_view('movies');
+                        }
+                        else if ($_POST['r'] == 'movie-add') {
+                            $controller->load_view('movie-add');
+                        }
+                        else if ($_POST['r'] == 'movie-edit') {
+                            $controller->load_view('movie-edit');
+                        }
+                        else if ($_POST['r'] == 'movie-delete') {
+                            $controller->load_view('movie-delete');
+                        }
+                        else if ($_POST['r'] == 'movie-show') {
+                            $controller->load_view('movie-show');
+                        }
                         break;
                     
                     case 'usuarios':
