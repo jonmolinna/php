@@ -29,7 +29,8 @@
             $status_select = '';
 
             for ($i=0; $i < count($status); $i++) {
-                $status_select .= '<option value="' .$status[$i]['id'] . '">' . $status[$i]['status'] . '</option>';
+                $selected = $movie[0]['status'] == $status[$i]['status'] ? 'selected' : '';
+                $status_select .= '<option value="' .$status[$i]['id'] . '"' .$selected . '>' . $status[$i]['status'] . '</option>';
             }
 
             $template_movie = '
@@ -173,7 +174,7 @@
                         <div class="order-2">
                             <input 
                                 type="submit" 
-                                value="Agregar"
+                                value="Guardar"
                                 class="bg-green-700 py-2 px-1 w-full rounded-md cursor-pointer hover:bg-green-500"
                             >
                             <input type="hidden" name="r" value="movie-edit" >
@@ -206,7 +207,39 @@
 
     }
     else if ($_POST['r'] == 'movie-edit' && $_SESSION['role'] == 'ADMIN' && $_POST['crud'] == 'set') {
+        $form = array(
+            'id' => $_POST['id'],
+            'title' => $_POST['title'],
+            'plot' => $_POST['plot'],
+            'author' => $_POST['author'],
+            'actors' => $_POST['actors'],
+            'country' => $_POST['country'],
+            'premiere' => $_POST['premiere'],
+            'poster' => $_POST['poster'],
+            'trailer' => $_POST['trailer'],
+            'rating' => $_POST['rating'],
+            'genres' => $_POST['genres'],
+            'status' => $_POST['status'],
+            'category' => $_POST['category'],
+        );
 
+        $data = $movies_controller->set($form);
+
+        $template = '
+            <div class="container mx-auto rounded-md">
+                <p class="text-center bg-green-700 text-white py-2">
+                    Movie: %s Editada
+                </p>
+            </div>
+
+            <script>
+                window.onload  = function() {
+                    reloadPage("movies");
+                }
+            </script>
+        ';
+
+        printf($template, $_POST['title']);
     }
     else {
         $controller = new ViewController();

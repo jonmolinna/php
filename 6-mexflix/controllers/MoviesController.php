@@ -16,7 +16,7 @@
         }
 
         public function delete($id = '') {
-            return $this->model-delete($id);
+            return $this->model->delete($id);
         }
 
         public function __destruct() {
