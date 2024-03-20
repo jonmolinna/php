@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax - Simple</title>
+</head>
+
+<body>
+
+    <button onclick="helloWorld()">
+        Send
+    </button>
+
+    <br><br>
+
+    <button onclick="getRequest()">
+        Get Ajax Request
+    </button>
+
+    <p id="title"></p>
+
+    <button onclick="sendRequest()">
+        Send Ajax Request
+    </button>
+
+    <p id="email"></p>
+
+    <script>
+        function helloWorld() {
+            console.log('Hola Mundo');
+        };
+
+        function getRequest() {
+            const theObject = new XMLHttpRequest();
+            theObject.open('GET', 'server.php', true);
+            theObject.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            theObject.onreadystatechange = function () {
+                console.log(theObject.responseText)
+                document.getElementById('title').innerHTML = theObject.responseText;
+            }
+            theObject.send();
+        }
+
+        function sendRequest() {
+            const theObject = new XMLHttpRequest();
+            theObject.open('POST', 'server.php', true);
+            theObject.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            theObject.onreadystatechange = function () {
+                document.getElementById('email').innerHTML = theObject.responseText;
+            }
+            theObject.send('email=kendra.contreras@dallase.pe');
+
+        }
+    </script>
+
+</body>
+
+</html>
