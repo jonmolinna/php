@@ -1,0 +1,8 @@
+# Reglas de Sobre Escritura
+RewriteEngine On
+
+# Ocultar las Carptetas
+Options All -Indexes
+
+# Url Amigables
+RewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?views=$1
