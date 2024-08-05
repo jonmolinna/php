@@ -2,7 +2,7 @@
     <div class="columns">
         <div class="column is-half is-offset-one-quarter">
             <div class="card ">
-                <form class="card-content">
+                <form class="card-content" method="POST" autocomplete="off">
                     <div class="field">
                         <label class="label">Username</label>
                         <div class="control">
