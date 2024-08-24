@@ -1,0 +1,1 @@
+Salir de la app

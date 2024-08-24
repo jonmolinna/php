@@ -15,9 +15,72 @@ formularios_ajax.forEach(formularios => {
             cancelButtonText: "No, cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
+                // Capturando datos en el formulario
+                let data = new FormData(this);
 
+                // obteniendo el metodo
+                let method = this.getAttribute("method");
+
+                // Obteniendo la ruta
+                let action = this.getAttribute("action");
+
+                let headers = new Headers();
+
+                let config = {
+                    method: method,
+                    headers: headers,
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    body: data,
+                };
+
+                fetch(action, config)
+                    .then(response => response.json())
+                    .then(response => {
+                        console.log('>>>>', response)
+                        return alertas_ajax(response)
+                    })
+                    .catch(error => console.log('error', error))
             }
         });
 
     })
 });
+
+function alertas_ajax(alert) {
+    if (alert.type == 'simple') {
+        Swal.fire({
+            icon: alert.icon,
+            title: alert.title,
+            text: alert.text,
+            confirmButtonText: 'Aceptar',
+        });
+    }
+    else if (alert.type == 'recargar') {
+        Swal.fire({
+            icon: alert.icon,
+            title: alert.title,
+            text: alert.text,
+            confirmButtonText: 'Aceptar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.reload();
+            }
+        });
+    }
+    else if (alert.type == 'clear') {
+        Swal.fire({
+            icon: alert.icon,
+            title: alert.title,
+            text: alert.text,
+            confirmButtonText: 'Aceptar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.querySelector(".FormularioAjax").reset();
+            }
+        });
+    }
+    else if (alert.type == 'redirect') {
+        window.location.href = alert.url;
+    }
+}
