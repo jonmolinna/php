@@ -1,1 +1,8 @@
-Salir de la app
+<?php
+
+    // ver index php
+
+    $isLogin->closeSession();
+
+
+?>

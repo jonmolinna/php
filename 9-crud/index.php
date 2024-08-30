@@ -25,6 +25,9 @@
 
     <?php 
         use app\controllers\ViewsController;
+        use app\controllers\LoginController;
+
+        $isLogin = new LoginController();
 
         $view_controller = new ViewsController();
         $view = $view_controller->getViewsController($url[0]);
@@ -32,6 +35,12 @@
         if ($view == 'login' || $view == '404') {
             require_once "./app/views/content/" . $view . "-view.php";
         } else {
+            // Cerrar Session
+            if (!isset($_SESSION['id']) || !isset($_SESSION['username']) || $_SESSION['id'] == "" || $_SESSION['username'] == "") {
+                $isLogin->closeSession();
+                // Detenemos la ejecucion
+                exit();
+            }
             require_once "./app/views/inc/navbar.php";
             require_once $view;
         }
