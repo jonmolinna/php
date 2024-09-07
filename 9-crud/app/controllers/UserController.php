@@ -273,7 +273,176 @@
 
             return json_encode($alerta);
         }
+
+        # Lists Users
+        public function listsUsers($page, $register, $url, $search) {
+            $page = $this->creanString($page);
+            $register = $this->creanString($register);
+            $url = $this->creanString($url);
+            // Como el controllador se ejecuta director el usersList, y este se ejecuta en index.php, tenemos en variabla APP_URL
+            $url = APP_URL . $url . "/";
+
+            $search = $this->creanString($search);
+            $tabla = "";
+
+            $page = (isset($page) && $page > 0) ? (int) $page : 1;
+            $inicio = ($page > 0) ? (($page * $register) - $register) : 0;
+
+            if (isset($search) && $search != "") {
+                $search_data = "SELECT * FROM users WHERE (id != ' " . $_SESSION['id'] . "' AND id != '1') AND (name LIKE '%$search%' OR surname LIKE '%$search%' OR email LIKE '%$search%' OR username LIKE '%$search%')) ORDER BY createdAt ASC LIMIT $inicio, $register";
+                $search_total = "SELECT COUNT(id) FROM users WHERE (id != ' " . $_SESSION['id'] . "' AND id != '1') AND (name LIKE '%$search%' OR surname LIKE '%$search%' OR email LIKE '%$search%'";
+
+            } else {
+                // No mostrar el usuario con session iniciada
+                $search_data = "SELECT * FROM users WHERE id != ' " . $_SESSION['id'] . "' AND id != '1' ORDER BY createdAt ASC LIMIT $inicio, $register";
+                $search_total = "SELECT COUNT(id) FROM users WHERE id != '" .$_SESSION['id'] . "' AND id != '1'";
+            }
+
+            $datos = $this->get_query($search_data);
+            // Obtener todos los datos seleccionados
+            $datos = $datos->fetchAll();
+
+            $total = $this->get_query($search_total);
+            $total = (int) $total->fetchColumn();
+
+            // ceil -> funcion que permite redondear 1.5 => 2
+            $numPages = ceil($total / $register);
+
+            $tabla .= '
+                <div class="table-container">
+                    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th class="has-text-centered">#</th>
+                            <th class="has-text-centered">Name</th>
+                            <th class="has-text-centered">Username</th>
+                            <th class="has-text-centered">Email</th>
+                            <th class="has-text-centered">CreatedAt</th>
+                            <th class="has-text-centered">Updated</th>
+                            <th class="has-text-centered" colspan="3">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            ';
+
+            if ($total >= 1 && $page <= $numPages) {
+                $contador = $inicio + 1;
+                $pag_inicio = $inicio + 1;
+
+                foreach($datos as $rows) {
+                    $tabla .= '
+                        <tr class="has-text-centered">
+                            <td>' . $contador . '</td>
+                            <td>'  . $rows['name'] . ' ' .$rows['surname'] . '</td>
+                            <td>' . $rows['surname'] . '</td>
+                            <td>' . $rows['email'] . '</td>
+                            <td>' . date("d-m-Y h:i:s A", strtotime($rows['createdAt'])) . '</td>
+                            <td>' . date("d-m-Y h:i:s A", strtotime($rows['updatedAt'])) . '</td>
+                            <td>
+                                <a href="' . APP_URL . 'userPhoto/' . $rows['id'] . '/" class="button is-info is-rounded is-small">Photo</a>
+                            </td>
+                            <td>
+                                <a href="' . APP_URL . 'userUpdate/' . $rows['id'] . '/" class="button is-success is-rounded is-small">Updated</a>
+                            </td>
+                            <td>
+                                <form class="FormularioAjax" action="' . APP_URL . 'app/ajax/UserAjax.php" method="POST" autocomplete="off">
+                                    <input type="hidden" name="modulo_user" value="delete">
+                                    <input type="hidden" name="userId" value="' . $rows['id'] . '">
+                                    <button type="submit" class="button is-danger is-rounded is-small">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    ';
+                    $contador++;
+                }
+
+                $pag_final = $contador - 1;
+            } else {
+                if ($total >= 1) {
+                    $tabla .= '
+                        <tr class="has-text-centered">
+                            <td colspan="7">
+                                <a href="' .$url . '1/" class="button is-link is-rounded is-small mt-4 mb-4">
+                                    Haga clic acá para recargar el listado
+                                </a>
+                            </td>
+                        </tr>
+                    ';
+                } else {
+                    $tabla .= '
+                        <tr class="has-text-centered" >
+                            <td colspan="7">
+                                No hay registros en el sistema
+                            </td>
+                        </tr>
+                    ';
+                }
+            }
+
+            $tabla .= '
+                    </tbody>
+                    </table>
+                </div>
+            
+            ';
+            
+            if ($total >= 1 && $page <= $numPages){
+                $tabla .= '<p class="has-text-right">Mostrando usuarios <strong>' . $pag_inicio .'</strong> al <strong>' . $pag_final . '</strong> de un <strong>total de ' . $total . '</strong></p>';
+
+                $tabla .= $this->paginadorTablas($page, $numPages, $url, 10);
+            }
+
+            return $tabla;
+        }
+
+        // Controlador eliminar usuarios
+        public function deleteUserController() {
+            $id = $this->creanString($_POST['userId']);
+
+            if ($id == 1) {
+                $alerta = [
+                    "type"=>"simple",
+                    "title"=>"Ocurrio un error inesperado",
+                    "text"=>"No se puede eliminar el usuario",
+                    "icon"=>"error"
+                ];
+
+                return json_encode($alerta);
+                exit();
+            }
+
+            # Verificando el usuario
+            $datos = $this->get_query("SELECT * FROM users WHERE id = '$id'");
+
+            if ($datos->rowCount() <= 0) {
+                $alerta = [
+                    "type"=>"simple",
+                    "title"=>"Ocurrio un error inesperado",
+                    "text"=>"El usuario no existe",
+                    "icon"=>"error"
+                ];
+
+                return json_encode($alerta);
+                exit();
+            } else {
+                // Hacemos un array de datos
+                $datos = $datos->fetch();
+            }
+
+            $deleteUser = $this->deleteData('users', 'id', $id);
+
+            if ($deleteUser->rowCount() == 1) {
+                $alerta = [
+                    "type"=>"recargar",
+                    "title"=>"Usuario eliminado",
+                    "text"=>"El usuario " .$datos['username'] . " Se elimino con exito",
+                    "icon"=>"success"
+                ];
+            }
+        }
     }
+
+    // 12-17
 
 
 ?>

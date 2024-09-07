@@ -13,6 +13,10 @@
             echo $user->registerUserController();
         }
 
+        if ($_POST['module_user'] == 'delete') {
+            echo $user->deleteUserController();
+        }
+
     } else {
         session_destroy();
         header("Location: " . APP_URL . "login/");
