@@ -432,17 +432,31 @@
             $deleteUser = $this->deleteData('users', 'id', $id);
 
             if ($deleteUser->rowCount() == 1) {
+                // Delete Photo
+                if (is_file("../views/photos/" . $datos['photo'])) {
+                    chmod("../views/photos/" . $datos['photo'], 0777);
+                    unlink("../views/photos/". $datos['photo']);
+                }
+
                 $alerta = [
                     "type"=>"recargar",
                     "title"=>"Usuario eliminado",
                     "text"=>"El usuario " .$datos['username'] . " Se elimino con exito",
                     "icon"=>"success"
                 ];
+            } else {
+                $alerta = [
+                    "type"=>"simple",
+                    "title"=>"Ocurrio un error inesperado",
+                    "text"=>"No se pudo eliminar el usuario, por favor intente nuevamente",
+                    "icon"=>"error"
+                ];
             }
+
+            return json_encode($alerta);
         }
     }
 
-    // 12-17
 
 
 ?>

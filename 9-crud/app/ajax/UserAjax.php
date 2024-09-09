@@ -13,7 +13,7 @@
             echo $user->registerUserController();
         }
 
-        if ($_POST['module_user'] == 'delete') {
+        if ($_POST['modulo_user'] == 'delete') {
             echo $user->deleteUserController();
         }
 
