@@ -17,6 +17,10 @@
             echo $user->deleteUserController();
         }
 
+        if ($_POST['modulo_user'] == 'updated') {
+            echo $user->updatedUserController();
+        }
+
     } else {
         session_destroy();
         header("Location: " . APP_URL . "login/");

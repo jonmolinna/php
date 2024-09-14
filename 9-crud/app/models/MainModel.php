@@ -97,7 +97,7 @@
             return $sql;
         }
 
-        protected function getData($type, $table, $campo, $id) {
+        public function getData($type, $table, $campo, $id) {
             $type = $this->creanString($type);
             $table = $this->creanString($table);
             $campo = $this->creanString($campo);
@@ -105,7 +105,7 @@
 
             if ($type == "unique") {
                 $sql = $this->connection()->prepare("SELECT * FROM $table WHERE $campo = :ID");
-                $sql->bindParam(":ID", $did);
+                $sql->bindParam(":ID", $id);
             }
             elseif ($type == "normal") {
                 $sql = $this->connection()->prepare("SELECT $campo FROM $table");
