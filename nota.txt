@@ -19,3 +19,192 @@ Iframe
 https://www.youtube.com/emded/k_UTfaGCDnU  => Iframe
 
 https://www.youtube.com/watch?v=AL9zLctDJaU/ => youtube 
+
+
+Laravel
+--------------------------------------------------
+composer create-project laravel/laravel 91-todo-list
+
+
+Server
+---------------------------------------------------------
+http://localhost/php_curso/91-todo-list/public/
+
+php -S localhost:8000 -t public/
+
+php artisan serve
+
+Laravel
+------------------------------------------
+
+MVC
+-----------------------------------------------------
+php artisan make:model task -mcr 
+    - crea
+        - model
+        - migration
+        - controller
+
+
+db -> laravel_task
+
+
+Migracion
+------------------------------------
+php artisan migrate
+
+$task = new Task(); ---> [Task::class, 'metodo'];
+
+
+php artisan make:migration create_student_table
+
+Models
+--------------------------------------
+php artisan make:model Student
+
+Controllers
+----------------------------------------------
+php artisan make:controller Api/StudentController
+php artisan make:controller stundentController
+
+
+APIS
+-------------------------------------------------
+php artisan install:api
+
+
+https://kinsta.com/blog/laravel-crud/
+
+JWT
+----------------------------------------------------
+composer require tymon/jwt-auth
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+
+https://medium.com/@a3rxander/how-to-implement-jwt-authentication-in-laravel-11-26e6d7be5a41
+
+
+
+
+
+CRUD LARAVEL
+-------------------------------
+composer create-project laravel/laravel 91-todo-list
+php artisan serve
+
+php artisan install:api
+
+php artisan make:model User
+
+php artisan make:migration create_user_table
+php artisan migrate
+
+php artisan make:controller Api/UserController
+php artisan make:controller Api/AuthController
+
+composer require tymon/jwt-auth
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+
+
+LARAVEL API + AUTH
+----------------------------------------------------
+composer global require laravel/installer
+laravel new example-app
+php artisan serve
+
+php artisan migrate
+
+php artisan make:controller AuthController
+php artisan make:request LoginRequest
+
+php artisan install:api
+
+
+ARTISAN COMANDOS
+-------------------------------------------------------------------
+php artisan list
+php artisan help migrate
+php artisan make:controller name_controller
+php artisan make:model name_model -m
+php artisan migrate
+php artisan tinker
+
+
+NEW PROJECT
+------------------------------------------------------
+composer global require laravel/installer
+
+- laravel new
+- name_project
+- Would you like to install a starter kill?  -> No starter kit
+- Which testing framework do you prefer? -> Pest
+- Would you like to initialize a Git repository? -> Yes
+- Wich database will your application use? -> Mysql
+
+php artisan serve
+
+--- Create Rutas
+-> bootstrap/app.php
+
+--- Create Models
+-> php artisan make:model Comment -m
+
+-> php artisan migrate
+-> php artisan migrate:rollback -> elimina la ultima migracion
+-> php artisan migrate:fresh -> elimina la base de datos
+-> php artisan migrate:status -> ver
+
+--- Tinker -> consola laravel
+php artisan tinker
+--> use App\Models\User;
+    -> User::all();
+
+    -> echo env('APP_NAME');
+
+User::with('comments')->get();
+
+--- Create Seeder
+php artisan make:seeder UsersSeeder --> create
+php artisan make:seeder CommentSeeder
+
+php artisan db:seed --> ejecuta
+php artisan db:seed --class=UserSeeder
+
+------------> php artisan migrate:fresh --seed
+
+--- Create Factories
+php artisan make:factory CommentFactory
+php artisan migrate:fresh --seed
+
+LIVEWIRE
+-----------------------------------------------------
+composer require livewire/livewire
+
+--- create component
+    -> php artisan make:livewire counter
+
+
+
+LARAVEL + AUTH
+-----------------------------------------------------------------------------
+composer create-project laravel/laravel name_project
+php artisan migrate
+php artisan install:api
+php artisan serve
+
+
+
+Controllers
+-------------------------
+php artisan make:controller UserController
+php artisan make:controller AuthController
+
+Install
+-------------------
+composer require tymon/jwt-auth
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
+
+
+php artisan make:model Todo -mc
