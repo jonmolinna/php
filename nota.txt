@@ -208,3 +208,6 @@ php artisan jwt:secret
 
 
 php artisan make:model Todo -mc
+
+php artisan make:migration create_users_table --create=users
+php artisan make:migration create_posts_table --create=posts
