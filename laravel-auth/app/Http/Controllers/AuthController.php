@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
@@ -27,11 +28,20 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if ($token = JWTAuth::attempt($credentials)) {
-            return response()->json(['token' => $token]);
+        // if ($token = JWTAuth::attempt($credentials)) {
+        //     return response()->json(['token' => $token]);
+        // }
+        // return response()->json(['error' => 'Unauthorized'], 401);
+
+        try {
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Could not create token'], 500);
         }
 
-        return response()->json(['error' => 'Unauthorized'], 401);
+        return response()->json(['token' => $token]);
     }
 
     public function logout() {
@@ -40,8 +50,16 @@ class AuthController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    public function me()
-    {
-        return response()->json(Auth::user());
+    public function me() {
+        try {
+            // Verifica si el token es válido y obtiene el usuario autenticado
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['error' => 'Usuario no autenticado'], 401);
+            }
+    
+            return response()->json($user);
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Token no proporcionado o es inválido'], 500);
+        }
     }
 }

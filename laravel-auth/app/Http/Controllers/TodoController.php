@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Models\User;
+use App\Models\Todo;
 
-class UserController extends Controller
+class TodoController extends Controller
 {
    public function store(Request $request) {
     $validator = Validator::make($request->all(), [
-        'name' => 'required|max:255',
-        'email' => 'required|email|unique:users',
-        'password' => 'required'
+        'name' => 'required',
     ]);
 
     if ($validator->fails()) {
@@ -25,16 +23,14 @@ class UserController extends Controller
         return response()->json($data, 400);
     }
 
-    $user = User::create([
+    $todo = Todo::create([
         'name' => $request->name,
-        'email' => $request->email,
-        // 'password' => $request->password
-        'password' => bcrypt($request->password)
+        'message' => 1
     ]);
 
-    if (!$user) {
+    if (!$todo) {
         $message = [
-            'message' => 'Error al crear el User',
+            'message' => 'Error al crear la tarea',
             'status' => 500
         ];
 
@@ -43,10 +39,9 @@ class UserController extends Controller
 
     $data = [
         'status' => 201,
-        'data' => $user,
+        'data' => $todo,
     ];
 
     return response()->json($data, 201);
-
    }
 }
